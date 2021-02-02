@@ -1,0 +1,16 @@
+plugins {
+    id 'java'
+}
+
+group 'kr.co.youngyoung'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile ('org.projectlombok:lombok:1.18.18')
+    annotationProcessor('org.projectlombok:lombok:1.18.18')
+    compile('org.springframework.boot:spring-boot-starter-web:2.4.2')
+}
