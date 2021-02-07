@@ -1,4 +1,4 @@
-package kr.co.youngyoung.goldnara.core.domain;
+package kr.co.youngyoung.goldnawa.core.domain;
 
 public enum ResultStatusCd {
 
