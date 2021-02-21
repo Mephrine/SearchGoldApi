@@ -1,2 +1,18 @@
 server:
   port: 8081
+
+# JDBC HIKARI
+spring:
+  datasource:
+    platform: postgres
+    hakari:
+      maximum-pool-size: 4
+    url: jdbc:postgresql://210.0.47.232:5432/goldnawa
+    username: goldnawa
+    password: goldnawa!
+
+logging:
+  config: classpath:log4j2.xml
+
+# API VERSION
+api-version: 1.0
