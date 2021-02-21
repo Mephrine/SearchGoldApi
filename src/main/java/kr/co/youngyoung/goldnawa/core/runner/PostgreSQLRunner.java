@@ -1,4 +1,4 @@
-package kr.co.youngyoung.goldnawa.core.datasource;
+package kr.co.youngyoung.goldnawa.core.runner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
@@ -21,14 +21,14 @@ public class PostgreSQLRunner implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments args) throws Exception {
         try (Connection connection = dataSource.getConnection()){
-            System.out.println(dataSource.getClass());
+           /* System.out.println(dataSource.getClass());
             System.out.println(connection.getMetaData().getURL());
             System.out.println(connection.getMetaData().getUserName());
 
             Statement statement = connection.createStatement();
             String sql = "select 1";
-            statement.executeUpdate(sql);
+            statement.executeUpdate(sql);*/
         }
-        jdbcTemplate.execute("select 2");
+        /*jdbcTemplate.queryForRowSet("select 3");*/
     }
 }
