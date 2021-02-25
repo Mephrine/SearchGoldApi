@@ -1,7 +1,7 @@
-package kr.co.youngyoung.goldnara.api.main.contoller;
+package kr.co.youngyoung.goldnawa.api.main.contoller;
 
-import kr.co.youngyoung.goldnara.common.domain.ApiDomain;
-import kr.co.youngyoung.goldnara.common.domain.value.ResultStatusCd;
+import kr.co.youngyoung.goldnawa.core.domain.ApiResponseObject;
+import kr.co.youngyoung.goldnawa.core.domain.ResultStatusCd;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,13 +15,13 @@ import java.util.Map;
 public class MainController {
 
     @GetMapping(path = "/appInfo")
-    public ApiDomain sample(){
+    public ApiResponseObject sample(){
 
         // TO-DO : We need to create an 'app_version' table in PG Database.
         Map<String,String> appVersionVO = new LinkedHashMap<String,String>();
         appVersionVO.put("app_version","1.0");
 
-        ApiDomain sample = new ApiDomain
+        ApiResponseObject sample = new ApiResponseObject
                 .Builder<Map>()
                 .data(appVersionVO)
                 .httpStatusCd(HttpStatus.OK)
@@ -32,7 +32,7 @@ public class MainController {
     }
 
     @GetMapping(path = "famousSaying")
-    public ApiDomain famousSaying(){
+    public ApiResponseObject famousSaying(){
 
         // TO-DO : We need to create an 'tbl_famous_saying' table in PG Database.
         Map<String,Object> famousSayingVO = new LinkedHashMap<String,Object>();
@@ -48,7 +48,7 @@ public class MainController {
         famousSayingVO.put("mod_user","버블");
         famousSayingVO.put("mod_date","2021-02-21 15:54:00");
 
-        ApiDomain sample = new ApiDomain
+        ApiResponseObject sample = new ApiResponseObject
                 .Builder<Map>()
                 .data(famousSayingVO)
                 .httpStatusCd(HttpStatus.OK)
