@@ -1,6 +1,6 @@
 package kr.co.youngyoung.goldnawa.api.sample.service;
 
-import kr.co.youngyoung.goldnawa.core.dao.BaseDao;
+import kr.co.youngyoung.goldnawa.core.mybatis.dao.BaseDao;
 import org.springframework.stereotype.Component;
 
 @Component

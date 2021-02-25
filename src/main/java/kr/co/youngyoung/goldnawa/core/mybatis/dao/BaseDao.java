@@ -1,6 +1,6 @@
-package kr.co.youngyoung.goldnawa.core.dao;
+package kr.co.youngyoung.goldnawa.core.mybatis.dao;
 
-import org.apache.ibatis.session.SqlSession;
+import kr.co.youngyoung.goldnawa.core.mybatis.service.MybatisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -9,5 +9,5 @@ public class BaseDao<T, P> {
     protected static final String QUERY_ID_PREFIX = "test";
 
     @Autowired
-    public MybatisDao<T, P> databaseDao;
+    public MybatisService<T, P> databaseDao;
 }

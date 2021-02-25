@@ -1,13 +1,11 @@
-package kr.co.youngyoung.goldnawa.core.dao;
+package kr.co.youngyoung.goldnawa.core.mybatis.service;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class MybatisDao<T, P> {
-
-
+public class MybatisService<T, P> {
     @Autowired
     private SqlSession sqlSession;
 
