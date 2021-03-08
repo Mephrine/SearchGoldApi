@@ -14,8 +14,8 @@ spring:
 logging:
   config: classpath:log4j2.xml
 
-# API VERSION
-api-version: 1.0
+# API KEY
+api.key: goldnawa!@#
 
 # MyBatis
 # mapper.xml 위치 지정

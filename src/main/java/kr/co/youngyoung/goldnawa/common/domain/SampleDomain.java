@@ -6,5 +6,5 @@ import org.apache.ibatis.type.Alias;
 @Alias("SampleDomain")
 @Data
 public class SampleDomain{
-
+    String test;
 }
