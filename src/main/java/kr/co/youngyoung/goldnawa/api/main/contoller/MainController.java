@@ -1,5 +1,7 @@
 package kr.co.youngyoung.goldnawa.api.main.contoller;
 
+import kr.co.youngyoung.goldnawa.core.annotation.ApiVersion;
+import kr.co.youngyoung.goldnawa.core.base.controller.BaseController;
 import kr.co.youngyoung.goldnawa.core.domain.ApiResponseObject;
 import kr.co.youngyoung.goldnawa.core.domain.ResultStatusCd;
 import org.springframework.http.HttpStatus;
@@ -11,12 +13,14 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/main")
-public class MainController {
+@ApiVersion({3})
+@RequestMapping("/api")
+public class MainController extends BaseController {
 
+    @ApiVersion({1, 1.1})
     @GetMapping(path = "/appInfo")
     public ApiResponseObject sample(){
-
+        getLogger().info("test");
         // TO-DO : We need to create an 'app_version' table in PG Database.
         Map<String,String> appVersionVO = new LinkedHashMap<String,String>();
         appVersionVO.put("app_version","1.0");
@@ -56,7 +60,6 @@ public class MainController {
                 .build();
 
         return sample;
-
     }
 
 }
