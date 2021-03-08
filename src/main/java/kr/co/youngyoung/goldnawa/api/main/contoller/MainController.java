@@ -1,9 +1,13 @@
 package kr.co.youngyoung.goldnawa.api.main.contoller;
 
+import kr.co.youngyoung.goldnawa.api.main.service.AppVersionService;
+import kr.co.youngyoung.goldnawa.api.price.service.GoldPriceHistoryService;
+import kr.co.youngyoung.goldnawa.common.domain.AppVersionDomain;
 import kr.co.youngyoung.goldnawa.core.annotation.ApiVersion;
 import kr.co.youngyoung.goldnawa.core.base.controller.BaseController;
 import kr.co.youngyoung.goldnawa.core.domain.ApiResponseObject;
 import kr.co.youngyoung.goldnawa.core.domain.ResultStatusCd;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,21 +17,22 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
-@ApiVersion({3})
+@ApiVersion({1})
 @RequestMapping("/api")
 public class MainController extends BaseController {
+    @Autowired
+    AppVersionService appVersionService;
 
     @ApiVersion({1, 1.1})
-    @GetMapping(path = "/appInfo")
-    public ApiResponseObject sample(){
+    @GetMapping(path = "/appVersion")
+    public ApiResponseObject appVersion(){
         getLogger().info("test");
         // TO-DO : We need to create an 'app_version' table in PG Database.
-        Map<String,String> appVersionVO = new LinkedHashMap<String,String>();
-        appVersionVO.put("app_version","1.0");
+        AppVersionDomain appVersionDomain = appVersionService.selectOne();
 
         ApiResponseObject sample = new ApiResponseObject
-                .Builder<Map>()
-                .data(appVersionVO)
+                .Builder<AppVersionDomain>()
+                .data(appVersionDomain)
                 .httpStatusCd(HttpStatus.OK)
                 .resultStatus(ResultStatusCd.SUCCESS)
                 .build();

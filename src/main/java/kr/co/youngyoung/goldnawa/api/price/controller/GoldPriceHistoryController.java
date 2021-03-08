@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiOperation;
 import kr.co.youngyoung.goldnawa.api.price.service.GoldPriceHistoryService;
 import kr.co.youngyoung.goldnawa.api.sample.service.SampleService;
 import kr.co.youngyoung.goldnawa.common.domain.GoldPriceDomain;
+import kr.co.youngyoung.goldnawa.core.annotation.ApiVersion;
 import kr.co.youngyoung.goldnawa.core.base.controller.BaseController;
 import kr.co.youngyoung.goldnawa.core.domain.ApiResponseObject;
 import kr.co.youngyoung.goldnawa.core.domain.ResultStatusCd;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
+@ApiVersion({1})
 @RequestMapping(path = "/api")
 public class GoldPriceHistoryController extends BaseController {
     @Autowired

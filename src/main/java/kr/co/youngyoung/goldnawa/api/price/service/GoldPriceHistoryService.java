@@ -7,9 +7,9 @@ import java.util.List;
 
 @Component
 public class GoldPriceHistoryService extends BaseDao<GoldPriceDomain, GoldPriceDomain> {
-    final private String nameSpace = "goldPriceHistory";
+    final private String NAMESPACE = "goldPriceHistory";
 
     public List<GoldPriceDomain> selectList() {
-        return databaseDao.selectList(nameSpace, "findList");
+        return databaseDao.selectList(NAMESPACE, "findList");
     }
 }
