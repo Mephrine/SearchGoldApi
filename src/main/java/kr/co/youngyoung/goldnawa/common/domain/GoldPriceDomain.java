@@ -13,29 +13,29 @@ public class GoldPriceDomain {
     private int goldPriceSeq;
 
     @ApiModelProperty(value = "테스트")
-    private int useYn;
+    private String useYn;
 
     @ApiModelProperty(value = "테스트")
-    private int displayYn;
+    private String displayYn;
 
     @ApiModelProperty(value = "테스트")
-    private int jewelryType;
+    private String jewelryType;
 
     @ApiModelProperty(value = "테스트")
-    private int goldDate;
+    private String goldDate;
 
     @ApiModelProperty(value = "테스트")
-    private int goldPurity;
+    private String goldPurity;
 
     @ApiModelProperty(value = "테스트")
-    private int goldPriceType;
+    private String goldPriceType;
 
     @ApiModelProperty(value = "테스트")
-    private int goldPrice;
+    private String goldPrice;
 
     @ApiModelProperty(value = "테스트")
-    private int counytryCode;
+    private String counytryCode;
 
     @ApiModelProperty(value = "테스트")
-    private int goldCurrency;
+    private String goldCurrency;
 }

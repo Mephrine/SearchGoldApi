@@ -14,10 +14,10 @@ public class ApiResponseObject<T> {
     private T data;
     
     @ApiModelProperty(value = "HTTP 코드")
-    private HttpStatus httpStatusCd;
+    private int httpStatusCd;
     
     @ApiModelProperty(value = "결과 코드")
-    private ResultStatusCd resultStatusCd;
+    private int resultStatusCd;
 
     public ApiResponseObject(Builder<T> builder) {
         this.data = builder.data;
@@ -27,8 +27,8 @@ public class ApiResponseObject<T> {
 
     public static class Builder<T> {
         private T data;
-        private HttpStatus httpStatusCd;
-        private ResultStatusCd resultStatusCd;
+        private int httpStatusCd;
+        private int resultStatusCd;
 
         public Builder<T> data(T data) {
             this.data = data;
@@ -37,13 +37,13 @@ public class ApiResponseObject<T> {
         }
 
         public Builder<T> httpStatusCd(HttpStatus httpStatusCd) {
-            this.httpStatusCd = httpStatusCd;
+            this.httpStatusCd = httpStatusCd.value();
 
             return this;
         }
 
         public Builder<T> resultStatus(ResultStatusCd resultStatusCd) {
-            this.resultStatusCd = resultStatusCd;
+            this.resultStatusCd = resultStatusCd.value();
 
             return this;
         }

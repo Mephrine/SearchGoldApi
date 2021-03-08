@@ -6,6 +6,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class SampleService extends BaseDao<String, String> {
     public String selectOne() {
-        return databaseDao.selectOne("sample.findBySample");
+        return databaseDao.selectOne("sample", "findBySample");
     }
 }
