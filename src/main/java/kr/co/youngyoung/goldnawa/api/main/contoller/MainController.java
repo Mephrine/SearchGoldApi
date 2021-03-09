@@ -1,8 +1,10 @@
 package kr.co.youngyoung.goldnawa.api.main.contoller;
 
 import kr.co.youngyoung.goldnawa.api.main.service.AppVersionService;
+import kr.co.youngyoung.goldnawa.api.main.service.FamousSayingService;
 import kr.co.youngyoung.goldnawa.api.price.service.GoldPriceHistoryService;
 import kr.co.youngyoung.goldnawa.common.domain.AppVersionDomain;
+import kr.co.youngyoung.goldnawa.common.domain.FamousSayingDomain;
 import kr.co.youngyoung.goldnawa.core.annotation.ApiVersion;
 import kr.co.youngyoung.goldnawa.core.base.controller.BaseController;
 import kr.co.youngyoung.goldnawa.core.domain.ApiResponseObject;
@@ -22,12 +24,12 @@ import java.util.Map;
 public class MainController extends BaseController {
     @Autowired
     AppVersionService appVersionService;
+    @Autowired
+    FamousSayingService famousSayingService;
 
     @ApiVersion({1, 1.1})
     @GetMapping(path = "/appVersion")
     public ApiResponseObject appVersion(){
-        getLogger().info("test");
-        // TO-DO : We need to create an 'app_version' table in PG Database.
         AppVersionDomain appVersionDomain = appVersionService.selectOne();
 
         ApiResponseObject sample = new ApiResponseObject
@@ -42,24 +44,11 @@ public class MainController extends BaseController {
 
     @GetMapping(path = "famousSaying")
     public ApiResponseObject famousSaying(){
-
-        // TO-DO : We need to create an 'tbl_famous_saying' table in PG Database.
-        Map<String,Object> famousSayingVO = new LinkedHashMap<String,Object>();
-
-        famousSayingVO.put("seq","1");
-        famousSayingVO.put("famous_saying","유명한 명언 입니다. \n 돈은 최고입니다.");
-        famousSayingVO.put("famous_saying_writer","워렌버블");
-        famousSayingVO.put("use_yn","Y");
-        famousSayingVO.put("display_yn","Y");
-        famousSayingVO.put("del_yn","N");
-        famousSayingVO.put("reg_user","버블");
-        famousSayingVO.put("reg_date","2021-02-21 15:54:00");
-        famousSayingVO.put("mod_user","버블");
-        famousSayingVO.put("mod_date","2021-02-21 15:54:00");
+        FamousSayingDomain famousSayingDomain = famousSayingService.selectOne();
 
         ApiResponseObject sample = new ApiResponseObject
-                .Builder<Map>()
-                .data(famousSayingVO)
+                .Builder<FamousSayingDomain>()
+                .data(famousSayingDomain)
                 .httpStatusCd(HttpStatus.OK)
                 .resultStatus(ResultStatusCd.SUCCESS)
                 .build();

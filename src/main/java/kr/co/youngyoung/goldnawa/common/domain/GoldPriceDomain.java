@@ -6,7 +6,7 @@ import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 @ApiModel
-@Alias("GoldPriceDomain")
+@Alias("goldPriceDomain")
 @Data
 public class GoldPriceDomain {
     @ApiModelProperty(value = "테스트")

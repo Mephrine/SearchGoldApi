@@ -10,6 +10,6 @@ public class GoldPriceHistoryService extends BaseDao<GoldPriceDomain, GoldPriceD
     final private String NAMESPACE = "goldPriceHistory";
 
     public List<GoldPriceDomain> selectList() {
-        return databaseDao.selectList(NAMESPACE, "findList");
+        return databaseDao.selectList(NAMESPACE);
     }
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 import org.apache.ibatis.type.Alias;
 
 @ApiModel
-@Alias("AppVersionDomain")
+@Alias("appVersionDomain")
 @Data
 public class AppVersionDomain {
     @ApiModelProperty(value = "테스트")

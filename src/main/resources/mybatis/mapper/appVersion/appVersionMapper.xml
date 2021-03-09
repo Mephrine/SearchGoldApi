@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="appVersion">
-    <select id="findOne" resultType="AppVersionDomain">
+    <select id="findOne" resultType="appVersionDomain">
         select app_version_seq
             , version
             , version_desc
@@ -11,6 +11,6 @@
             and display_yn = 'Y'
             and del_yn= 'N'
         order by reg_date desc
-        limit 1;
+        limit 1
     </select>
 </mapper>

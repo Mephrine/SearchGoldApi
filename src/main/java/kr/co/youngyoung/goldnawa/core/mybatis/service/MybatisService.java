@@ -15,6 +15,10 @@ public class MybatisService<T, P> {
     @Autowired
     private SqlSession sqlSession;
 
+    public T selectOne(String nameSpace) {
+        return this.sqlSession.selectOne(nameSpace+".findOne");
+    }
+
     public T selectOne(String nameSpace, String id) {
         return this.sqlSession.selectOne(nameSpace+"."+id);
     }
@@ -23,13 +27,15 @@ public class MybatisService<T, P> {
         return this.sqlSession.selectOne(nameSpace+"."+id, parameter);
     }
 
+    public List<T> selectList(String nameSpace) {
+        return this.sqlSession.selectList(nameSpace+".findList");
+    }
+
     public List<T> selectList(String nameSpace, String id) {
         return this.sqlSession.selectList(nameSpace+"."+id);
     }
 
-    public T selectList(String nameSpace, String id, P parameter) {
-        T obj = sqlSession.selectOne(nameSpace+"."+id, parameter);
-
-        return obj;
+    public List<T> selectList(String nameSpace, String id, P parameter) {
+        return this.sqlSession.selectList(nameSpace+"."+id, parameter);
     }
 }
