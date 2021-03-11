@@ -2,6 +2,7 @@ package kr.co.youngyoung.goldnawa.common.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import kr.co.youngyoung.goldnawa.core.domain.DefaultCommonDomain;
 import lombok.Data;
 import org.apache.ibatis.type.Alias;
 

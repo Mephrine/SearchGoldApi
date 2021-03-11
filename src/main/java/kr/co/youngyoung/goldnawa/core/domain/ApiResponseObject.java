@@ -3,7 +3,9 @@ package kr.co.youngyoung.goldnawa.core.domain;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import kr.co.youngyoung.goldnawa.common.domain.AppVersionDomain;
 import lombok.Data;
+import org.springframework.cglib.beans.BulkBean;
 import org.springframework.http.HttpStatus;
 
 
@@ -25,10 +27,20 @@ public class ApiResponseObject<T> {
         this.resultStatusCd = builder.resultStatusCd;
     }
 
+    public static <T> Builder<T> data(T data) {
+        return new Builder(data);
+    }
+
     public static class Builder<T> {
         private T data;
         private int httpStatusCd;
         private int resultStatusCd;
+
+        public Builder() { }
+
+        public Builder(T data) {
+            this.data = data;
+        }
 
         public Builder<T> data(T data) {
             this.data = data;

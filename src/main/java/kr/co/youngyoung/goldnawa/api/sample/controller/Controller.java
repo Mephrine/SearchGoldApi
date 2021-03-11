@@ -4,7 +4,7 @@ import io.swagger.annotations.ApiOperation;
 import kr.co.youngyoung.goldnawa.api.sample.service.SampleService;
 import kr.co.youngyoung.goldnawa.common.domain.SampleDomain;
 import kr.co.youngyoung.goldnawa.core.annotation.ApiVersion;
-import kr.co.youngyoung.goldnawa.core.base.controller.BaseController;
+import kr.co.youngyoung.goldnawa.core.controller.BaseController;
 import kr.co.youngyoung.goldnawa.core.domain.ApiResponseObject;
 import kr.co.youngyoung.goldnawa.core.domain.ResultStatusCd;
 import org.springframework.beans.factory.annotation.Autowired;
