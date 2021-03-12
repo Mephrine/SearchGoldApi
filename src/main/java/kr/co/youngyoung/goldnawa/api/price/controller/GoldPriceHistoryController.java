@@ -1,6 +1,8 @@
 package kr.co.youngyoung.goldnawa.api.price.controller;
 
+import io.swagger.annotations.ApiModelProperty;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import kr.co.youngyoung.goldnawa.api.price.service.GoldPriceHistoryService;
 import kr.co.youngyoung.goldnawa.common.domain.GoldPriceDomain;
 import kr.co.youngyoung.goldnawa.common.domain.GoldPriceParameterDomain;
@@ -24,43 +26,21 @@ public class GoldPriceHistoryController extends BaseController {
     @GetMapping(path = "/goldPriceHistory")
     @ApiOperation(value = "금값 히스토리 조회", notes = "금값 히스토리 조회 화면 입니다")
     public ApiResponseObject<List<GoldPriceDomain>> goldPriceHistory() {
-        List<GoldPriceDomain> goldPriceHistoryList = goldPriceHistoryService.selectList();
-
-        getLogger().info("test {}", goldPriceHistoryList);
-
-        ApiResponseObject<List<GoldPriceDomain>> sample = new ApiResponseObject
-                .Builder<List<GoldPriceDomain>>()
-                .data(goldPriceHistoryList)
-                .httpStatusCd(HttpStatus.OK)
-                .resultStatus(ResultStatusCd.SUCCESS)
-                .build();
-
-        return sample;
-    }
-
-    @ModelAttribute("goldPriceParameterDomain")
-    public GoldPriceParameterDomain prepareGoldPriceParameterDomain(@PathVariable String item, @PathVariable String method, @PathVariable String period) {
-        return new GoldPriceParameterDomain();
+        return goldPriceHistoryService.getGoldPriceHistory();
     }
 
     @GetMapping(path = "/goldPriceHistory/{item}/{method}/{period}")
     @ApiOperation(value = "금값 히스토리 조회", notes = "금값 히스토리 조회 화면 입니다")
+    @ApiModelProperty(value = "품목", notes = "금, 백금, 다이아 설정 가능", allowableValues = "gold, platinum, diamond")
     public ApiResponseObject<List<GoldPriceDomain>> goldPriceHistoryDetail(
+            @ApiParam(value = "품목", allowableValues = "gold, platinum, diamond")
             @PathVariable(value = "item") String item,
+            @ApiParam(value = "팔기/사기", allowableValues = "buy, sell")
             @PathVariable(value = "method") String method,
+            @ApiParam(value = "조회 주기", allowableValues = "daily, modthly, yearly")
             @PathVariable(value = "period") String period
     ) {
-        List<GoldPriceDomain> goldPriceHistoryList = goldPriceHistoryService.selectList();
-
-        getLogger().info("test {}", goldPriceHistoryList);
-
-        ApiResponseObject<List<GoldPriceDomain>> sample = new ApiResponseObject
-                .Builder<List<GoldPriceDomain>>()
-                .data(goldPriceHistoryList)
-                .httpStatusCd(HttpStatus.OK)
-                .resultStatus(ResultStatusCd.SUCCESS)
-                .build();
-
-        return sample;
+        GoldPriceParameterDomain goldPriceParameterDomain = new GoldPriceParameterDomain(item, method, period);
+        return goldPriceHistoryService.getGoldPriceHistoryDetail(goldPriceParameterDomain);
     }
 }

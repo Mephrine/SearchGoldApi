@@ -17,4 +17,13 @@ public class GoldPriceParameterDomain {
 
     @ApiModelProperty(value = "조회 주기", notes = "조회 주기 지정 가능", allowableValues = "daily, modthly, yearly")
     private String period;
+
+    public GoldPriceParameterDomain() {
+    }
+
+    public GoldPriceParameterDomain(String item, String method, String period) {
+        this.item = item;
+        this.method = method;
+        this.period = period;
+    }
 }

@@ -19,6 +19,10 @@ public class MybatisService<T, P> {
         return this.sqlSession.selectOne(nameSpace+".findOne");
     }
 
+    public T selectOne(String nameSpace, P parameter) {
+        return this.sqlSession.selectOne(nameSpace+".", parameter);
+    }
+
     public T selectOne(String nameSpace, String id) {
         return this.sqlSession.selectOne(nameSpace+"."+id);
     }
@@ -29,6 +33,10 @@ public class MybatisService<T, P> {
 
     public List<T> selectList(String nameSpace) {
         return this.sqlSession.selectList(nameSpace+".findList");
+    }
+
+    public List<T> selectList(String nameSpace, P parameter) {
+        return this.sqlSession.selectList(nameSpace+".findList", parameter);
     }
 
     public List<T> selectList(String nameSpace, String id) {
