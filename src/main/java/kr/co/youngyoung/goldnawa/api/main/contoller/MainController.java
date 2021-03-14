@@ -1,62 +1,58 @@
 package kr.co.youngyoung.goldnawa.api.main.contoller;
 
+import io.swagger.annotations.ApiOperation;
+import kr.co.youngyoung.goldnawa.api.main.service.AppVersionService;
+import kr.co.youngyoung.goldnawa.api.main.service.FamousSayingService;
+import kr.co.youngyoung.goldnawa.api.main.service.YoutubeListService;
+import kr.co.youngyoung.goldnawa.common.domain.AppVersionDomain;
+import kr.co.youngyoung.goldnawa.common.domain.FamousSayingDomain;
+import kr.co.youngyoung.goldnawa.common.domain.YoutubeListDomain;
+import kr.co.youngyoung.goldnawa.core.annotation.ApiVersion;
+import kr.co.youngyoung.goldnawa.core.controller.BaseController;
 import kr.co.youngyoung.goldnawa.core.domain.ApiResponseObject;
 import kr.co.youngyoung.goldnawa.core.domain.ResultStatusCd;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 @RestController
-@RequestMapping("/main")
-public class MainController {
+@ApiVersion({1})
+@RequestMapping("/api")
+public class MainController extends BaseController {
+    @Autowired
+    AppVersionService appVersionService;
+    @Autowired
+    FamousSayingService famousSayingService;
+    @Autowired
+    YoutubeListService youtubeListService;
 
-    @GetMapping(path = "/appInfo")
-    public ApiResponseObject sample(){
-
-        // TO-DO : We need to create an 'app_version' table in PG Database.
-        Map<String,String> appVersionVO = new LinkedHashMap<String,String>();
-        appVersionVO.put("app_version","1.0");
-
-        ApiResponseObject sample = new ApiResponseObject
-                .Builder<Map>()
-                .data(appVersionVO)
-                .httpStatusCd(HttpStatus.OK)
-                .resultStatus(ResultStatusCd.SUCCESS)
-                .build();
-
-        return sample;
+    /**
+     * 앱 최신 버전을 조회한다
+     * */
+    @GetMapping(path = "/appVersion")
+    @ApiOperation(value = "앱 버전 조회", notes = "앱 최신 버전 조회 화면입니다")
+    public ApiResponseObject<AppVersionDomain> appVersion() {
+        return appVersionService.getLatestAppVersion();
+    }
+    
+    /**
+     * 무작위 명언을 조회한다
+     * */
+    @GetMapping(path = "/famousSaying")
+    @ApiOperation(value = "명언 조회", notes = "무작위 금과 관련된 명언조회 화면입니다")
+    public ApiResponseObject<FamousSayingDomain> famousSaying() {
+        return famousSayingService.getFamousSaying();
     }
 
-    @GetMapping(path = "famousSaying")
-    public ApiResponseObject famousSaying(){
-
-        // TO-DO : We need to create an 'tbl_famous_saying' table in PG Database.
-        Map<String,Object> famousSayingVO = new LinkedHashMap<String,Object>();
-
-        famousSayingVO.put("seq","1");
-        famousSayingVO.put("famous_saying","유명한 명언 입니다. \n 돈은 최고입니다.");
-        famousSayingVO.put("famous_saying_writer","워렌버블");
-        famousSayingVO.put("use_yn","Y");
-        famousSayingVO.put("display_yn","Y");
-        famousSayingVO.put("del_yn","N");
-        famousSayingVO.put("reg_user","버블");
-        famousSayingVO.put("reg_date","2021-02-21 15:54:00");
-        famousSayingVO.put("mod_user","버블");
-        famousSayingVO.put("mod_date","2021-02-21 15:54:00");
-
-        ApiResponseObject sample = new ApiResponseObject
-                .Builder<Map>()
-                .data(famousSayingVO)
-                .httpStatusCd(HttpStatus.OK)
-                .resultStatus(ResultStatusCd.SUCCESS)
-                .build();
-
-        return sample;
-
+    /**
+     * 무작위 명언을 조회한다
+     * */
+    @GetMapping(path = "/youtubeList")
+    @ApiOperation(value = "유투브 리스트", notes = "금과 관련된 추천 영상을 가져오는 화면입니다")
+    public ApiResponseObject<YoutubeListDomain> youtubeList() {
+        return youtubeListService.getYouTubeList();
     }
 
 }

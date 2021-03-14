@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="youtubeList">
+    <select id="findList" resultType="youtubeListDomain">
+        select youtube_list_seq
+            , youtube_title
+            , youtube_sub_title
+            , youtube_url
+            , thumb_img_url
+        from tbl_youtube_list tyl
+        where use_yn = 'Y'
+            and display_yn = 'Y'
+            and del_yn= 'N'
+        order by reg_date desc
+    </select>
+</mapper>

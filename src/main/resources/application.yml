@@ -14,13 +14,12 @@ spring:
 logging:
   config: classpath:log4j2.xml
 
-# API VERSION
-api-version: 1.0
+# API KEY
+api.key: goldnawa!@#
 
 # MyBatis
 # mapper.xml 위치 지정
-#mybatis.mapper-locations: mybatis/mapper/**/*.xml
-mybatis.mapper-locations: mybatis/mapper/*.xml
+mybatis.mapper-locations: mybatis/mapper/**/*.xml
 # model 프로퍼티 camel case 설정
 mybatis.configuration.map-underscore-to-camel-case: true
 # 패키지 명을 생략할 수 있도록 alias 설정

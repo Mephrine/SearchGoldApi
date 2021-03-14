@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="goldPriceHistory">
+    <select id="findList" resultType="goldPriceDomain" parameterType="goldPriceDomain">
+        select *
+        from tbl_gold_price tgp
+    </select>
+
+    <select id="findListDetail" resultType="goldPriceDomain" parameterType="goldPriceParameterDomain">
+        select *
+        from (
+            select gold_price_seq, jewelry_type, to_char(gold_date, 'YYYYMMDD') gold_date, gold_purity, gold_price, gold_price_type
+        from tbl_gold_price
+            where jewelry_type = #{jewelryType}
+                and gold_price_type = #{goldPriceType}
+                and use_yn = 'Y'
+                and del_yn = 'N'
+        ) tgp right join (
+            select to_char(to_date(#{searchStartDate}, 'YYYYMMDD') - interval '1' ${dateType} * l, 'YYYYMMDD') cal_date
+            from generate_series(1, #{dateLength}) l
+        ) cal on tgp.gold_date = cal.cal_date
+        order by cal.cal_date desc
+    </select>
+</mapper>

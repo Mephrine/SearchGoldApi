@@ -1,4 +1,4 @@
-package kr.co.youngyoung.goldnawa.core.base.controller;
+package kr.co.youngyoung.goldnawa.core.controller;
 
 import lombok.Data;
 import org.slf4j.Logger;
