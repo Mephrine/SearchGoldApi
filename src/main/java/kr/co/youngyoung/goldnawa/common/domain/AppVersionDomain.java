@@ -9,7 +9,7 @@ import org.apache.ibatis.type.Alias;
 @ApiModel
 @Alias("appVersionDomain")
 @Data
-public class AppVersionDomain {
+public class AppVersionDomain extends DefaultCommonDomain{
     @ApiModelProperty(value = "버전 시퀀스")
     private int appVersionSeq;
 

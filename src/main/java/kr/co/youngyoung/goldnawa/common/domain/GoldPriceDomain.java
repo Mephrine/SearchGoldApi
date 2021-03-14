@@ -9,7 +9,7 @@ import org.apache.ibatis.type.Alias;
 @ApiModel
 @Alias("goldPriceDomain")
 @Data
-public class GoldPriceDomain {
+public class GoldPriceDomain extends DefaultCommonDomain{
     @ApiModelProperty(value = "테스트")
     private int goldPriceSeq;
 
@@ -24,6 +24,9 @@ public class GoldPriceDomain {
 
     @ApiModelProperty(value = "테스트")
     private String goldDate;
+
+    @ApiModelProperty(value = "테스트")
+    private String calDate;
 
     @ApiModelProperty(value = "테스트")
     private String goldPurity;

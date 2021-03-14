@@ -6,6 +6,6 @@ import org.apache.ibatis.type.Alias;
 
 @Alias("SampleDomain")
 @Data
-public class SampleDomain {
+public class SampleDomain extends DefaultCommonDomain{
     String test;
 }

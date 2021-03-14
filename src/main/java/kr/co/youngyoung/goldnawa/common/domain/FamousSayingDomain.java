@@ -9,7 +9,7 @@ import org.apache.ibatis.type.Alias;
 @ApiModel
 @Alias("famousSayingDomain")
 @Data
-public class FamousSayingDomain {
+public class FamousSayingDomain extends DefaultCommonDomain{
     @ApiModelProperty(value = "시퀀스")
     private int famousSayingSeq;
 
