@@ -9,6 +9,7 @@
 
     <select id="findListDetail" resultType="goldPriceDomain" parameterType="goldPriceParameterDomain">
         select tgp.gold_date,
+            gold_price_type,
             jewelry_type,
             (select code_value from tbl_common_code where code =  tgp.jewelry_type) jewelry_type_nm,
             gold_purity,
