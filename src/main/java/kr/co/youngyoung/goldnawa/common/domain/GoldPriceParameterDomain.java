@@ -30,14 +30,18 @@ public class GoldPriceParameterDomain extends DefaultCommonDomain {
     private String dateType;
 
     @JsonIgnore
+    private String searchDateType;
+
+    @JsonIgnore
     private int dateLength;
 
     public GoldPriceParameterDomain() {
     }
 
-    public GoldPriceParameterDomain(String item, String method, String period) {
-        this.item = item;
-        this.method = method;
-        this.period = period;
+    public GoldPriceParameterDomain(String item, String method, String period, String date) {
+        setItem(item);
+        setMethod(method);
+        setPeriod(period);
+        setSearchStartDate(date);
     }
 }

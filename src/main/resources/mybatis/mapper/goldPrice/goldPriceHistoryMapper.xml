@@ -8,18 +8,31 @@
     </select>
 
     <select id="findListDetail" resultType="goldPriceDomain" parameterType="goldPriceParameterDomain">
-        select *
+        select tgp.gold_date,
+            jewelry_type,
+            (select code_value from tbl_common_code where code =  tgp.jewelry_type) jewelry_type_nm,
+            gold_purity,
+            round(avg(gold_price)) avg_gold_price,
+            max(gold_price) max_gold_price,
+            min(gold_price) min_gold_price,
+            #{period} period
         from (
-            select gold_price_seq, jewelry_type, to_char(gold_date, 'YYYYMMDD') gold_date, gold_purity, gold_price, gold_price_type
+            select gold_price_seq,
+            jewelry_type,
+            to_char(gold_date, #{searchDateType}) gold_date,
+            gold_purity,
+            gold_price_type,
+            replace(gold_price, ',', '')::INT gold_price
         from tbl_gold_price
             where jewelry_type = #{jewelryType}
                 and gold_price_type = #{goldPriceType}
                 and use_yn = 'Y'
                 and del_yn = 'N'
-        ) tgp right join (
-            select to_char(to_date(#{searchStartDate}, 'YYYYMMDD') - interval '1' ${dateType} * l, 'YYYYMMDD') cal_date
+        ) tgp inner join (
+            select to_char(to_date(#{searchStartDate}, #{searchDateType}) - interval '1' ${dateType} * l, #{searchDateType}) cal_date
             from generate_series(1, #{dateLength}) l
         ) cal on tgp.gold_date = cal.cal_date
-        order by cal.cal_date desc
+        group by jewelry_type, gold_purity, tgp.gold_date
+        order by tgp.gold_date desc
     </select>
 </mapper>

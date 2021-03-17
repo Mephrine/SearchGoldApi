@@ -17,7 +17,7 @@ public class FamousSayingService extends BaseDao<FamousSayingDomain, FamousSayin
     /**
      * 무작위 명언을 가져온다
      * */
-    public ApiResponseObject getFamousSaying() {
+    public ApiResponseObject<FamousSayingDomain> getFamousSaying() {
 
         setHttpStatus(HttpStatus.OK);
         setResultStatusCd(ResultStatusCd.SUCCESS);

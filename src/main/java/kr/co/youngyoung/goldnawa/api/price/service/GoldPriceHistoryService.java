@@ -50,23 +50,25 @@ public class GoldPriceHistoryService extends BaseDao<GoldPriceDomain, GoldPriceP
         //기간구분 설정
         String period = goldPriceParameterDomain.getPeriod();
         String dateType;
-        dateType = "daily".equals(period)?"day":"monthly".equals(period)?"month":"yearly".equals(period)?"year":"";
+        dateType = "daily".equals(period)?"day":"monthly".equals(period)?"month":"yearly".equals(period)?"year":"recent".equals(period)?"day":"";
         goldPriceParameterDomain.setDateType(dateType);
         //조회날자 설정
         int DateLength;
-        DateLength = "daily".equals(period)?90:"monthly".equals(period)?24:"yearly".equals(period)?5:0;
+        DateLength = "daily".equals(period)?90:"monthly".equals(period)?24:"yearly".equals(period)?5:"recent".equals(period)?3:0;
         goldPriceParameterDomain.setDateLength(DateLength);
         //조회시작날자 설정
-        String searchStartDate = "";//goldPriceParameterDomain.getSearchStartDate();
-        searchStartDate = "".equals(searchStartDate)?LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")):"";
+        String searchDateType = "";
+        String searchStartDate = goldPriceParameterDomain.getSearchStartDate();
+        searchStartDate = "".equals(searchStartDate)?LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")):searchStartDate;
+        searchStartDate = "daily".equals(period)?searchStartDate:"monthly".equals(period)?searchStartDate.substring(0, 6):"yearly".equals(period)?searchStartDate.substring(0, 4):"recent".equals(period)?searchStartDate:"";
+        searchDateType = "daily".equals(period)?"YYYYMMDD":"monthly".equals(period)?"YYYYMM":"yearly".equals(period)?"YYYY":"recent".equals(period)?"YYYYMMDD":"";
         goldPriceParameterDomain.setSearchStartDate(searchStartDate);
+        goldPriceParameterDomain.setSearchDateType(searchDateType);
         //거래 설정
         String method = goldPriceParameterDomain.getMethod();
         String goldPriceType;
         goldPriceType = "buy".equals(method)?"B":"sell".equals(method)?"S":"";
         goldPriceParameterDomain.setGoldPriceType(goldPriceType);
-        //조회시작날자 설정
-        String serachStartDate;
 
 
         setHttpStatus(HttpStatus.OK);

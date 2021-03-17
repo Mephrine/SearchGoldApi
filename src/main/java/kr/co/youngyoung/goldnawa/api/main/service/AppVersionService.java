@@ -16,7 +16,7 @@ public class AppVersionService extends BaseDao<AppVersionDomain, AppVersionDomai
     /**
     * 앱 최신 버전을 가져온다
     * */
-    public ApiResponseObject getLatestAppVersion() {
+    public ApiResponseObject<AppVersionDomain> getLatestAppVersion() {
         setHttpStatus(HttpStatus.OK);
         setResultStatusCd(ResultStatusCd.SUCCESS);
 

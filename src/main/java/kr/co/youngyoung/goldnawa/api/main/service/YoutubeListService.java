@@ -7,6 +7,8 @@ import kr.co.youngyoung.goldnawa.core.mybatis.dao.BaseDao;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class YoutubeListService extends BaseDao<YoutubeListDomain, YoutubeListDomain> {
     public YoutubeListService(){
@@ -16,7 +18,7 @@ public class YoutubeListService extends BaseDao<YoutubeListDomain, YoutubeListDo
     /**
     * 유투브 리스트를 가져온다
     * */
-    public ApiResponseObject getYouTubeList() {
+    public ApiResponseObject<List<YoutubeListDomain>> getYouTubeList() {
         setHttpStatus(HttpStatus.OK);
         setResultStatusCd(ResultStatusCd.SUCCESS);
 
