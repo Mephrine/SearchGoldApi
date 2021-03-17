@@ -13,6 +13,7 @@
             jewelry_type,
             (select code_value from tbl_common_code where code =  tgp.jewelry_type) jewelry_type_nm,
             gold_purity,
+            (select code_value from tbl_common_code where code =  tgp.gold_purity) gold_purity_nm,
             round(avg(gold_price)) avg_gold_price,
             max(gold_price) max_gold_price,
             min(gold_price) min_gold_price,

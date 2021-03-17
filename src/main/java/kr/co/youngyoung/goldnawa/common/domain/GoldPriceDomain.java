@@ -22,6 +22,9 @@ public class GoldPriceDomain extends DefaultCommonDomain{
     @ApiModelProperty(value = "순도")
     private String goldPurity;
 
+    @ApiModelProperty(value = "순도")
+    private String goldPurityNm;
+
     @ApiModelProperty(value = "살때, 팔때")
     private String goldPriceType;
 
