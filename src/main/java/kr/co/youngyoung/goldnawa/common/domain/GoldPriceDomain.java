@@ -43,6 +43,9 @@ public class GoldPriceDomain extends DefaultCommonDomain{
     @ApiModelProperty(value = "통화")
     private String goldCurrency;
 
+    @ApiModelProperty(value = "통화")
+    private String goldCurrencyNm;
+
     @ApiModelProperty(value = "기간")
     private String period;
 }
