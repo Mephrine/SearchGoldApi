@@ -5,8 +5,10 @@ import io.swagger.annotations.ApiOperation;
 import kr.co.youngyoung.goldnawa.api.main.service.AppVersionService;
 import kr.co.youngyoung.goldnawa.api.main.service.FamousSayingService;
 import kr.co.youngyoung.goldnawa.api.main.service.YoutubeListService;
+import kr.co.youngyoung.goldnawa.api.price.service.GoldPriceHistoryService;
 import kr.co.youngyoung.goldnawa.common.domain.AppVersionDomain;
 import kr.co.youngyoung.goldnawa.common.domain.FamousSayingDomain;
+import kr.co.youngyoung.goldnawa.common.domain.GoldPriceParameterDomain;
 import kr.co.youngyoung.goldnawa.common.domain.YoutubeListDomain;
 import kr.co.youngyoung.goldnawa.core.annotation.ApiVersion;
 import kr.co.youngyoung.goldnawa.core.controller.BaseController;
@@ -30,6 +32,8 @@ public class MainController extends BaseController {
     FamousSayingService famousSayingService;
     @Autowired
     YoutubeListService youtubeListService;
+    @Autowired
+    GoldPriceHistoryService goldPriceHistoryService;
 
     /**
      * 앱 최신 버전을 조회한다
@@ -62,13 +66,14 @@ public class MainController extends BaseController {
      * 앱 초기 구동시 조회
      * */
     @GetMapping(path = "/appInitData")
-    @ApiOperation(value = "앱 구동시 데이터", notes = "앱 버전, 명언, 유투브 조회")
+    @ApiOperation(value = "앱 구동시 데이터", notes = "앱 버전, 명언, 최근 시세 3일치 조회")
     public ApiResponseObject<HashMap<String, Object>> appInitData() {
         HashMap<String, Object> hashMap = Maps.newHashMap();
 
         hashMap.put("appVersionDomain", appVersionService.getLatestAppVersion().getData());
         hashMap.put("famousSayingDomain", famousSayingService.getFamousSaying().getData());
-        hashMap.put("youtubeListDomains", youtubeListService.getYouTubeList().getData());
+        GoldPriceParameterDomain goldPriceParameterDomain = new GoldPriceParameterDomain("gold", "buy", "recent", "");
+        hashMap.put("goldPriceDomain", goldPriceHistoryService.getGoldPriceHistoryDetail(goldPriceParameterDomain).getData());
 
         return ApiResponseObject
                 .data(hashMap)

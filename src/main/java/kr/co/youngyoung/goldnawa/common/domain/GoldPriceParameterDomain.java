@@ -11,7 +11,7 @@ import org.apache.ibatis.type.Alias;
 @Alias("goldPriceParameterDomain")
 @Data
 public class GoldPriceParameterDomain extends DefaultCommonDomain {
-    @ApiModelProperty(value = "품목", notes = "금, 백금, 다이아 설정 가능", allowableValues = "gold, platinum, diamond")
+    @ApiModelProperty(value = "품목", notes = "금, 백금, 실버 설정 가능", allowableValues = "gold, platinum, silver")
     private String item;
     
     @ApiModelProperty(value = "팔기/사기", notes = "팔고 사기 설정 가능", allowableValues = "buy, sell")

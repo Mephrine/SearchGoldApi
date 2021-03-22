@@ -30,7 +30,7 @@ public class GoldPriceHistoryController extends BaseController {
     }
 
     @GetMapping(path = "/goldPriceHistory/recent")
-    @ApiOperation(value = "최근 3일 금값 히스토리 조회", notes = "금값 히스토리 조회 화면 입니다")
+    @ApiOperation(value = "최근 3일 금값 히스토리 조회", notes = "금값 히스토리 조회")
     @ApiModelProperty(value = "품목", notes = "금, 백금, 다이아 설정 가능", allowableValues = "gold, platinum, diamond")
     public ApiResponseObject<List<GoldPriceDomain>> goldPriceHistoryRecent() {
         GoldPriceParameterDomain goldPriceParameterDomain = new GoldPriceParameterDomain("gold", "buy", "recent", "");
@@ -38,10 +38,9 @@ public class GoldPriceHistoryController extends BaseController {
     }
 
     @GetMapping(path = "/goldPriceHistory/{item}/{method}/{period}")
-    @ApiOperation(value = "금값 히스토리 조회", notes = "금값 히스토리 조회 화면 입니다")
-    @ApiModelProperty(value = "품목", notes = "금, 백금, 다이아 설정 가능", allowableValues = "gold, platinum, diamond")
+    @ApiOperation(value = "금값 히스토리 조회", notes = "금값 히스토리 조회")
     public ApiResponseObject<List<GoldPriceDomain>> goldPriceHistoryDetail(
-            @ApiParam(value = "품목", allowableValues = "gold, platinum, diamond")
+            @ApiParam(value = "품목", allowableValues = "gold, platinum, silver")
             @PathVariable(value = "item", required = true) String item,
             @ApiParam(value = "팔기/사기", allowableValues = "buy, sell")
             @PathVariable(value = "method", required = true) String method,
@@ -53,16 +52,15 @@ public class GoldPriceHistoryController extends BaseController {
     }
 
     @GetMapping(path = "/goldPriceHistory/{item}/{method}/{period}/{date}")
-    @ApiOperation(value = "금값 히스토리 조회", notes = "금값 히스토리 조회 화면 입니다")
-    @ApiModelProperty(value = "품목", notes = "금, 백금, 다이아 설정 가능", allowableValues = "gold, platinum, diamond")
+    @ApiOperation(value = "금값 히스토리 조회(조회 날자 포함)", notes = "금값 히스토리 조회(조회 날자 포함)")
     public ApiResponseObject<List<GoldPriceDomain>> goldPriceHistoryDetailDate(
-            @ApiParam(value = "품목", allowableValues = "gold, platinum, diamond")
+            @ApiParam(value = "품목", allowableValues = "gold, platinum, silver")
             @PathVariable(value = "item", required = true) String item,
             @ApiParam(value = "팔기/사기", allowableValues = "buy, sell")
             @PathVariable(value = "method", required = true) String method,
             @ApiParam(value = "조회 주기", allowableValues = "daily, monthly, yearly")
             @PathVariable(value = "period", required = true) String period,
-            @ApiParam(value = "조회 날자[yyyyMMdd]")
+            @ApiParam(value = "조회 날자[YYYY-MM-DD]", required = true)
             @PathVariable(value = "date") String date
     ) {
         GoldPriceParameterDomain goldPriceParameterDomain = new GoldPriceParameterDomain(item, method, period, date);

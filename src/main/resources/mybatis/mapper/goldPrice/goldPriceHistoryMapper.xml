@@ -7,7 +7,45 @@
         from tbl_gold_price tgp
     </select>
 
+    <!--데이터 기반 조회-->
     <select id="findListDetail" resultType="goldPriceDomain" parameterType="goldPriceParameterDomain">
+         select tgp.gold_date,
+            gold_price_type,
+            jewelry_type,
+            (select code_value from tbl_common_code where code_key = tgp.jewelry_type) jewelry_type_nm,
+            gold_purity,
+            (select code_value from tbl_common_code where code_key = tgp.gold_purity) gold_purity_nm,
+            round(avg(gold_price)) avg_gold_price,
+            max(gold_price) max_gold_price,
+            min(gold_price) min_gold_price,
+            gold_currency,
+            (select code_value from tbl_common_code where code_key = tgp.gold_currency) gold_currency_nm,
+            country_code,
+            (select code_value from tbl_common_code where code_key = tgp.country_code) country_code_nm,
+            #{period} period
+        from (
+            select gold_price_seq,
+            jewelry_type,
+            to_char(gold_date, #{searchDateType}) gold_date,
+            gold_purity,
+            gold_price_type,
+            gold_price,
+            gold_currency,
+            country_code
+        from tbl_gold_price
+            where jewelry_type = #{jewelryType}
+                and gold_price_type = #{goldPriceType}
+                and use_yn = 'Y'
+                and del_yn = 'N'
+        ) tgp
+        where gold_date <![CDATA[ <= ]]> #{searchStartDate}
+        group by tgp.jewelry_type, tgp.gold_purity, tgp.gold_date, tgp.gold_price_type, gold_currency, country_code
+        order by tgp.gold_date desc
+        limit ${dateLength} offset 0
+    </select>
+
+    <!--날짜 기반 조회-->
+    <select id="findListDetail_old" resultType="goldPriceDomain" parameterType="goldPriceParameterDomain">
         select tgp.gold_date,
             gold_price_type,
             jewelry_type,

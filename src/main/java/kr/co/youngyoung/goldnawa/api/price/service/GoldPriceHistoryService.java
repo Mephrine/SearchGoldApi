@@ -58,8 +58,8 @@ public class GoldPriceHistoryService extends BaseDao<GoldPriceDomain, GoldPriceP
         String searchDateType = "";
         String searchStartDate = goldPriceParameterDomain.getSearchStartDate();
         searchStartDate = "".equals(searchStartDate)?LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")):searchStartDate;
-        searchStartDate = "daily".equals(period)?searchStartDate:"monthly".equals(period)?searchStartDate.substring(0, 6):"yearly".equals(period)?searchStartDate.substring(0, 4):"recent".equals(period)?searchStartDate:"";
-        searchDateType = "daily".equals(period)?"YYYYMMDD":"monthly".equals(period)?"YYYYMM":"yearly".equals(period)?"YYYY":"recent".equals(period)?"YYYYMMDD":"";
+        searchStartDate = "daily".equals(period)?searchStartDate:"monthly".equals(period)?searchStartDate.substring(0, 7):"yearly".equals(period)?searchStartDate.substring(0, 4):"recent".equals(period)?searchStartDate:"";
+        searchDateType = "daily".equals(period)?"YYYY-MM-DD":"monthly".equals(period)?"YYYY-MM":"yearly".equals(period)?"YYYY":"recent".equals(period)?"YYYY-MM-DD":"";
         goldPriceParameterDomain.setSearchStartDate(searchStartDate);
         goldPriceParameterDomain.setSearchDateType(searchDateType);
         //거래 설정
