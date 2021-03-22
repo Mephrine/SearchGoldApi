@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="commonCode">
+    <select id="findList" resultType="commonCodeDomain">
+        select code,
+            upper_code,
+            floor(length(code) / 3) code_depth,
+            code_key,
+            code_value,
+            code_desc,
+            sort_order
+        from tbl_common_code tcc
+        where del_yn = 'N'
+            and use_yn = 'Y'
+    </select>
+
+    <select id="findOne" resultType="commonCodeDomain">
+        select code,
+            upper_code,
+            code_key,
+            code_value,
+            code_desc,
+            sort_order
+        from tbl_common_code tcc
+        where del_yn = 'N'
+            and use_yn = 'Y'
+            and code_key = #{codeKey}
+    </select>
+</mapper>

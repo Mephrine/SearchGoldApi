@@ -40,6 +40,8 @@ public class GoldPriceHistoryService extends BaseDao<GoldPriceDomain, GoldPriceP
          * C002003	C002	실버	실버
          * */
 
+        dataBaseCommonCodeService.getList("JEWELRY_TYPE");
+
         //귀금속 설정
         String item = goldPriceParameterDomain.getItem();
         String jewrlyType;

@@ -1,5 +1,6 @@
 package kr.co.youngyoung.goldnawa.core.mybatis.dao;
 
+import kr.co.youngyoung.goldnawa.core.code.service.impl.DataBaseCommonCodeService;
 import kr.co.youngyoung.goldnawa.core.domain.ResultStatusCd;
 import kr.co.youngyoung.goldnawa.core.mybatis.service.MybatisService;
 import lombok.Data;
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Repository;
 public class BaseDao<T, P> {
     @Autowired
     public MybatisService<T, P> databaseDao;
+    @Autowired
+    public DataBaseCommonCodeService dataBaseCommonCodeService;
     @Getter
     @Setter
     private String nameSpace;
