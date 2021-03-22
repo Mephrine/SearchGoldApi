@@ -10,19 +10,19 @@ import org.apache.ibatis.type.Alias;
 @Alias("goldPriceDomain")
 @Data
 public class GoldPriceDomain extends DefaultCommonDomain{
-    @ApiModelProperty(value = "금, 백금, 은")
+    @ApiModelProperty(value = "귀금속코드")
     private String jewelryType;
 
-    @ApiModelProperty(value = "금, 백금, 은")
+    @ApiModelProperty(value = "귀금속명")
     private String jewelryTypeNm;
 
     @ApiModelProperty(value = "시세 날자")
     private String goldDate;
 
-    @ApiModelProperty(value = "순도")
+    @ApiModelProperty(value = "순도코드")
     private String goldPurity;
 
-    @ApiModelProperty(value = "순도")
+    @ApiModelProperty(value = "순도명")
     private String goldPurityNm;
 
     @ApiModelProperty(value = "살때, 팔때")
@@ -38,12 +38,15 @@ public class GoldPriceDomain extends DefaultCommonDomain{
     private String avgGoldPrice;
 
     @ApiModelProperty(value = "국가코드")
-    private String counytryCode;
+    private String countryCode;
 
-    @ApiModelProperty(value = "통화")
+    @ApiModelProperty(value = "국가명")
+    private String countryCodeNm;
+
+    @ApiModelProperty(value = "통화코드")
     private String goldCurrency;
 
-    @ApiModelProperty(value = "통화")
+    @ApiModelProperty(value = "통화명")
     private String goldCurrencyNm;
 
     @ApiModelProperty(value = "기간")

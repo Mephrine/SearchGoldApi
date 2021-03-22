@@ -5,10 +5,8 @@ import kr.co.youngyoung.goldnawa.common.domain.GoldPriceParameterDomain;
 import kr.co.youngyoung.goldnawa.core.domain.ApiResponseObject;
 import kr.co.youngyoung.goldnawa.core.domain.ResultStatusCd;
 import kr.co.youngyoung.goldnawa.core.mybatis.dao.BaseDao;
-import org.apache.tomcat.jni.Local;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -45,7 +43,7 @@ public class GoldPriceHistoryService extends BaseDao<GoldPriceDomain, GoldPriceP
         //귀금속 설정
         String item = goldPriceParameterDomain.getItem();
         String jewrlyType;
-        jewrlyType = "gold".equals(item)?"C002001":"platinum".equals(item)?"C002002":"silver".equals(item)?"C002003":"";
+        jewrlyType = "gold".equals(item)?"GOLD":"platinum".equals(item)?"PLATINUM":"silver".equals(item)?"SILVER":"";
         goldPriceParameterDomain.setJewelryType(jewrlyType);
         //기간구분 설정
         String period = goldPriceParameterDomain.getPeriod();

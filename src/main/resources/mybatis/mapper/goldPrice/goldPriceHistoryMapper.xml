@@ -11,14 +11,16 @@
         select tgp.gold_date,
             gold_price_type,
             jewelry_type,
-            (select code_value from tbl_common_code where code = tgp.jewelry_type) jewelry_type_nm,
+            (select code_value from tbl_common_code where code_key = tgp.jewelry_type) jewelry_type_nm,
             gold_purity,
-            (select code_value from tbl_common_code where code = tgp.gold_purity) gold_purity_nm,
+            (select code_value from tbl_common_code where code_key = tgp.gold_purity) gold_purity_nm,
             round(avg(gold_price)) avg_gold_price,
             max(gold_price) max_gold_price,
             min(gold_price) min_gold_price,
             gold_currency,
-            (select code_value from tbl_common_code where code = tgp.gold_currency) gold_currency_nm,
+            (select code_value from tbl_common_code where code_key = tgp.gold_currency) gold_currency_nm,
+            country_code,
+            (select code_value from tbl_common_code where code_key = tgp.country_code) country_code_nm,
             #{period} period
         from (
             select gold_price_seq,
@@ -26,8 +28,9 @@
             to_char(gold_date, #{searchDateType}) gold_date,
             gold_purity,
             gold_price_type,
-            replace(gold_price, ',', '')::INT gold_price,
-            gold_currency
+            gold_price,
+            gold_currency,
+            country_code
         from tbl_gold_price
             where jewelry_type = #{jewelryType}
                 and gold_price_type = #{goldPriceType}
@@ -37,7 +40,7 @@
             select to_char(to_date(#{searchStartDate}, #{searchDateType}) - interval '1' ${dateType} * l, #{searchDateType}) cal_date
             from generate_series(1, #{dateLength}) l
         ) cal on tgp.gold_date = cal.cal_date
-        group by tgp.jewelry_type, tgp.gold_purity, tgp.gold_date, tgp.gold_price_type, gold_currency
+        group by tgp.jewelry_type, tgp.gold_purity, tgp.gold_date, tgp.gold_price_type, gold_currency, country_code
         order by tgp.gold_date desc
     </select>
 </mapper>
