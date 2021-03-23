@@ -16,8 +16,6 @@ import org.springframework.stereotype.Repository;
 public class BaseDao<T, P> {
     @Autowired
     public MybatisService<T, P> databaseDao;
-    @Autowired
-    public DataBaseCommonCodeService dataBaseCommonCodeService;
     @Getter
     @Setter
     private String nameSpace;

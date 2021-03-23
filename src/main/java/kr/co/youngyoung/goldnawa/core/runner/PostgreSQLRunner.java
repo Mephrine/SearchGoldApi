@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
-import java.sql.Statement;
 
 @Component
 public class PostgreSQLRunner implements ApplicationRunner {
@@ -27,16 +26,5 @@ public class PostgreSQLRunner implements ApplicationRunner {
         Connection connection = dataSource.getConnection();
         logger.info("Url: " + connection.getMetaData().getURL());
         logger.info("UserName: " + connection.getMetaData().getUserName());
-
-        /*try (Connection connection = dataSource.getConnection()){
-            System.out.println(dataSource.getClass());
-            System.out.println(connection.getMetaData().getURL());
-            System.out.println(connection.getMetaData().getUserName());
-
-            Statement statement = connection.createStatement();
-            String sql = "select 1";
-            statement.executeUpdate(sql);
-        }*/
-        /*jdbcTemplate.queryForRowSet("select 3");*/
     }
 }

@@ -13,6 +13,7 @@
         from tbl_common_code tcc
         where del_yn = 'N'
             and use_yn = 'Y'
+        order by sort_order
     </select>
 
     <select id="findOne" resultType="commonCodeDomain">
@@ -25,6 +26,6 @@
         from tbl_common_code tcc
         where del_yn = 'N'
             and use_yn = 'Y'
-            and code_key = #{codeKey}
+            and code = #{code}
     </select>
 </mapper>

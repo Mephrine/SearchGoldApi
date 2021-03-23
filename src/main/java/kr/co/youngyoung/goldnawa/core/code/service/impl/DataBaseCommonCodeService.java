@@ -2,11 +2,10 @@ package kr.co.youngyoung.goldnawa.core.code.service.impl;
 
 import com.google.common.collect.Lists;
 import kr.co.youngyoung.goldnawa.core.code.domain.CommonCodeDomain;
-import kr.co.youngyoung.goldnawa.core.code.exception.CodeNotFoundException;
-import kr.co.youngyoung.goldnawa.core.code.exception.IllegalCodeReturnException;
 import kr.co.youngyoung.goldnawa.core.code.service.SimpleCommonCodeService;
 import kr.co.youngyoung.goldnawa.core.mybatis.service.MybatisService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -15,45 +14,73 @@ import java.util.stream.Collectors;
 
 @Service
 public class DataBaseCommonCodeService implements SimpleCommonCodeService {
+    private List<CommonCodeDomain> codeList;
     @Autowired
     public MybatisService<CommonCodeDomain, CommonCodeDomain> databaseDao;
 
-    private List<CommonCodeDomain> codeList;
-
     @Override
-    public List<CommonCodeDomain> getList(String code){
-        int depth = StringUtils.countOccurrencesOf(code, CODE_SEPARATOR)+1;
-        String[] subCode = code.split(CODE_SEPARATOR);
-        List<CommonCodeDomain> tmlCodeList = getCode();
+    public List<CommonCodeDomain> getList(String codeKeyString){
+        int cIndex = 0;
+        String[] subCodeKey = codeKeyString.split("\\.");
+        String upperCode = "";
+        List<CommonCodeDomain> tmpCodeList;
 
-        /*뎁스가 1인 경우*/
-        for(int i = 1; i <= depth; i++) {
-            int cDepth = i;
-            tmlCodeList = getCode().stream().filter(c -> {
-                return c.getCodeKey().equals(code) && c.getCodeDepth() == cDepth;
-            }).collect(Collectors.toList());
+        for(String s: subCodeKey){
+            tmpCodeList = Lists.newArrayList();
+
+            for(CommonCodeDomain c: getCommonCodeList()){
+                if(cIndex == 0?
+                        c.getCodeKey().equals(s):
+                        c.getUpperCode().equals(upperCode) && c.getCodeKey().equals(s)) {
+                    tmpCodeList.add(c);
+                }
+            }
+
+            upperCode = tmpCodeList.get(0).getCode();
+            cIndex++;
         }
 
-        /*if( tmlCodeList.size() == 0 ) {
-            throw new CodeNotFoundException("code not founded");
-        }*/
-
-        return tmlCodeList;
+        String finalUpperCode = upperCode;
+        return getCommonCodeList().stream().filter(c -> c.getUpperCode().equals(finalUpperCode)).collect(Collectors.toList());
     }
 
     @Override
-    public CommonCodeDomain getOne(String code) {
-        return getList(code).get(0);
+    public CommonCodeDomain getOne(String codeKeyString) {
+        int cIndex = 0;
+        String[] subCodeKey = codeKeyString.split("\\.");
+        String upperCode = "";
+        List<CommonCodeDomain> tmpCodeList = Lists.newArrayList();
+
+        for(String s: subCodeKey){
+            tmpCodeList = Lists.newArrayList();
+
+            for(CommonCodeDomain c: getCommonCodeList()){
+                if(cIndex == 0?
+                        c.getCodeKey().equals(s):
+                        c.getUpperCode().equals(upperCode) && c.getCodeKey().equals(s)) {
+                    tmpCodeList.add(c);
+                }
+            }
+
+            upperCode = tmpCodeList.get(0).getCode();
+            cIndex++;
+        }
+
+        return tmpCodeList.get(0);
     }
 
     @Override
-    public void setCode() {
-        this.codeList = databaseDao.selectList(NAMESPACE);
+    public List<CommonCodeDomain> getCommonCodeList() {
+        slowQuery(1000);
+        return this.databaseDao.selectList(NAMESPACE);
     }
 
-    @Override
-    public List<CommonCodeDomain> getCode() {
-        setCode();
-        return this.codeList;
+    // 빅쿼리를 돌린다는 가정
+    private void slowQuery(long seconds) {
+        try {
+            Thread.sleep(seconds);
+        } catch (InterruptedException e) {
+            throw new IllegalStateException(e);
+        }
     }
 }

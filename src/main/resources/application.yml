@@ -17,6 +17,9 @@ logging:
 # API KEY
 api.key: goldnawa!@#
 
+# Caching
+# spring.cache.ehcache.config: classpath:ehcache.xml
+
 # MyBatis
 # mapper.xml 위치 지정
 mybatis.mapper-locations: mybatis/mapper/**/*.xml
