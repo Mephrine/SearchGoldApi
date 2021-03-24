@@ -80,7 +80,7 @@ public class GoldPriceHistoryService extends BaseDao<GoldPriceDomain, GoldPriceP
         goldPriceDomainList.stream().forEach(c -> {
             c.setJewelryTypeNm(cacheCommonCodeService.getOne("ROOT.JEWELRY_TYPE."+c.getJewelryType()).getCodeValue());
             c.setGoldPurityNm(cacheCommonCodeService.getOne("ROOT.PURITY."+c.getGoldPurity()).getCodeValue());
-            c.setGoldPurityNm(cacheCommonCodeService.getOne("ROOT.CURRENCY."+c.getGoldCurrency()).getCodeValue());
+            c.setGoldCurrencyNm(cacheCommonCodeService.getOne("ROOT.CURRENCY."+c.getGoldCurrency()).getCodeValue());
             c.setCountryCodeNm(cacheCommonCodeService.getOne("ROOT.COUNTRY_CODE."+c.getCountryCode()).getCodeValue());
         });
 
