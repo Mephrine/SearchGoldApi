@@ -2,12 +2,12 @@ package kr.co.youngyoung.goldnawa.core.code.service.impl;
 
 import com.google.common.collect.Lists;
 import kr.co.youngyoung.goldnawa.core.code.domain.CommonCodeDomain;
+import kr.co.youngyoung.goldnawa.core.code.exception.CodeNotFoundException;
+import kr.co.youngyoung.goldnawa.core.code.exception.IllegalCodeReturnException;
 import kr.co.youngyoung.goldnawa.core.code.service.SimpleCommonCodeService;
 import kr.co.youngyoung.goldnawa.core.mybatis.service.MybatisService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,6 +36,10 @@ public class DataBaseCommonCodeService implements SimpleCommonCodeService {
                 }
             }
 
+            if( tmpCodeList.size() == 0 ){
+                throw new CodeNotFoundException("That code doesn't exist.");
+            }
+
             upperCode = tmpCodeList.get(0).getCode();
             cIndex++;
         }
@@ -62,8 +66,16 @@ public class DataBaseCommonCodeService implements SimpleCommonCodeService {
                 }
             }
 
+            if( tmpCodeList.size() == 0 ){
+                throw new CodeNotFoundException("That code doesn't exist.");
+            }
+
             upperCode = tmpCodeList.get(0).getCode();
             cIndex++;
+        }
+
+        if( tmpCodeList.size() > 1 ){
+            throw new IllegalCodeReturnException("Code size is 2 or more.");
         }
 
         return tmpCodeList.get(0);
@@ -71,16 +83,6 @@ public class DataBaseCommonCodeService implements SimpleCommonCodeService {
 
     @Override
     public List<CommonCodeDomain> getCommonCodeList() {
-        slowQuery(1000);
         return this.databaseDao.selectList(NAMESPACE);
-    }
-
-    // 빅쿼리를 돌린다는 가정
-    private void slowQuery(long seconds) {
-        try {
-            Thread.sleep(seconds);
-        } catch (InterruptedException e) {
-            throw new IllegalStateException(e);
-        }
     }
 }

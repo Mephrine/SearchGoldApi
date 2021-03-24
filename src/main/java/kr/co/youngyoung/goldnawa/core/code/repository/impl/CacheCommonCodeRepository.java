@@ -15,18 +15,8 @@ public class CacheCommonCodeRepository implements SimpleCommonCodeRepository {
     public MybatisService<CommonCodeDomain, CommonCodeDomain> databaseDao;
 
     @Override
-    @Cacheable(value="commonCodeCache", key="#name")
+    @Cacheable(value="commonCodeCache", key="#root.methodName")
     public List<CommonCodeDomain> getCommonCodeList() {
-        slowQuery(1000);
         return databaseDao.selectList(NAMESPACE);
-    }
-
-    // 빅쿼리를 돌린다는 가정
-    private void slowQuery(long seconds) {
-        try {
-            Thread.sleep(seconds);
-        } catch (InterruptedException e) {
-            throw new IllegalStateException(e);
-        }
     }
 }

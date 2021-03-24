@@ -12,16 +12,12 @@
          select tgp.gold_date,
             gold_price_type,
             jewelry_type,
-            (select code_value from tbl_common_code where code_key = tgp.jewelry_type) jewelry_type_nm,
             gold_purity,
-            (select code_value from tbl_common_code where code_key = tgp.gold_purity) gold_purity_nm,
             round(avg(gold_price)) avg_gold_price,
             max(gold_price) max_gold_price,
             min(gold_price) min_gold_price,
             gold_currency,
-            (select code_value from tbl_common_code where code_key = tgp.gold_currency) gold_currency_nm,
             country_code,
-            (select code_value from tbl_common_code where code_key = tgp.country_code) country_code_nm,
             #{period} period
         from (
             select gold_price_seq,

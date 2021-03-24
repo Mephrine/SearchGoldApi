@@ -11,6 +11,7 @@ spring:
     username: goldnawa
     password: goldnawa!
 
+# Logging
 logging:
   config: classpath:log4j2.xml
 
@@ -18,7 +19,7 @@ logging:
 api.key: goldnawa!@#
 
 # Caching
-# spring.cache.ehcache.config: classpath:ehcache.xml
+spring.cache.jcache.config: classpath:ehcache.xml
 
 # MyBatis
 # mapper.xml 위치 지정

@@ -40,18 +40,8 @@ public class GoldPriceHistoryService extends BaseDao<GoldPriceDomain, GoldPriceP
     }
 
     public ApiResponseObject<List<GoldPriceDomain>> getGoldPriceHistoryDetail(GoldPriceParameterDomain goldPriceParameterDomain) {
-        /**
-         * C003001	C003	24K	24K
-         * C003002	C003	18K	18K
-         * C003003	C003	14K	14K
-         *
-         * C002001	C002	금	금
-         * C002002	C002	백금	백금
-         * C002003	C002	실버	실버
-         * */
-
         cacheCommonCodeService.getList("ROOT.JEWELRY_TYPE");
-        cacheCommonCodeService.getOne("ROOT.JEWELRY_TYPE");
+
         dataBaseCommonCodeService.getList("ROOT.JEWELRY_TYPE");
         dataBaseCommonCodeService.getOne("ROOT.JEWELRY_TYPE");
 
@@ -83,12 +73,19 @@ public class GoldPriceHistoryService extends BaseDao<GoldPriceDomain, GoldPriceP
         goldPriceType = "buy".equals(method)?"B":"sell".equals(method)?"S":"";
         goldPriceParameterDomain.setGoldPriceType(goldPriceType);
 
-
         setHttpStatus(HttpStatus.OK);
         setResultStatusCd(ResultStatusCd.SUCCESS);
+        //코드화
+        List<GoldPriceDomain> goldPriceDomainList = databaseDao.selectList(getNameSpace(), "Detail", goldPriceParameterDomain);
+        goldPriceDomainList.stream().forEach(c -> {
+            c.setJewelryTypeNm(cacheCommonCodeService.getOne("ROOT.JEWELRY_TYPE."+c.getJewelryType()).getCodeValue());
+            c.setGoldPurityNm(cacheCommonCodeService.getOne("ROOT.PURITY."+c.getGoldPurity()).getCodeValue());
+            c.setGoldPurityNm(cacheCommonCodeService.getOne("ROOT.CURRENCY."+c.getGoldCurrency()).getCodeValue());
+            c.setCountryCodeNm(cacheCommonCodeService.getOne("ROOT.COUNTRY_CODE."+c.getCountryCode()).getCodeValue());
+        });
 
         return ApiResponseObject
-                .data(databaseDao.selectList(getNameSpace(), "Detail", goldPriceParameterDomain))
+                .data(goldPriceDomainList)
                 .httpStatusCd(getHttpStatus())
                 .resultStatus(getResultStatusCd())
                 .build();

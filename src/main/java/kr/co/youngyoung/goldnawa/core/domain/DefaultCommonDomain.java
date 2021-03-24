@@ -5,7 +5,6 @@ import lombok.Data;
 import org.springframework.http.HttpStatus;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 
 @Data
 public class DefaultCommonDomain implements Serializable {

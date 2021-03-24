@@ -5,13 +5,15 @@ import lombok.Data;
 import org.apache.ibatis.type.Alias;
 import springfox.documentation.annotations.ApiIgnore;
 
+import java.io.Serializable;
+
 /**
  * API 서비스에서 사용되는 코드들의 도메인
  * */
 @Data
 @Alias("commonCodeDomain")
 @ApiIgnore
-public class CommonCodeDomain {
+public class CommonCodeDomain implements Serializable {
     //코드
     @JsonIgnore
     String code;
@@ -26,7 +28,7 @@ public class CommonCodeDomain {
     String codeKey;
     //코드값
     @JsonIgnore
-    String cokeValue;
+    String codeValue;
     //코드설명
     @JsonIgnore
     String codeDesc;

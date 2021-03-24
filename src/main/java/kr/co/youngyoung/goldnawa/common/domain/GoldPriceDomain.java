@@ -9,7 +9,7 @@ import org.apache.ibatis.type.Alias;
 @ApiModel
 @Alias("goldPriceDomain")
 @Data
-public class GoldPriceDomain extends DefaultCommonDomain{
+public class GoldPriceDomain extends DefaultCommonDomain {
     @ApiModelProperty(value = "귀금속코드")
     private String jewelryType;
 
