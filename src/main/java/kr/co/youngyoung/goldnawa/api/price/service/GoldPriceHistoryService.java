@@ -3,16 +3,13 @@ package kr.co.youngyoung.goldnawa.api.price.service;
 import kr.co.youngyoung.goldnawa.common.domain.GoldPriceDomain;
 import kr.co.youngyoung.goldnawa.common.domain.GoldPriceParameterDomain;
 import kr.co.youngyoung.goldnawa.core.code.service.SimpleCommonCodeService;
-import kr.co.youngyoung.goldnawa.core.code.service.impl.DataBaseCommonCodeService;
 import kr.co.youngyoung.goldnawa.core.domain.ApiResponseObject;
 import kr.co.youngyoung.goldnawa.core.domain.ResultStatusCd;
 import kr.co.youngyoung.goldnawa.core.mybatis.dao.BaseDao;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.Resource;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -40,11 +37,6 @@ public class GoldPriceHistoryService extends BaseDao<GoldPriceDomain, GoldPriceP
     }
 
     public ApiResponseObject<List<GoldPriceDomain>> getGoldPriceHistoryDetail(GoldPriceParameterDomain goldPriceParameterDomain) {
-        cacheCommonCodeService.getList("ROOT.JEWELRY_TYPE");
-
-        dataBaseCommonCodeService.getList("ROOT.JEWELRY_TYPE");
-        dataBaseCommonCodeService.getOne("ROOT.JEWELRY_TYPE");
-
         //귀금속 설정
         String item = goldPriceParameterDomain.getItem();
         String jewrlyType;

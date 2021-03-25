@@ -21,7 +21,7 @@ public class DataBaseCommonCodeService implements SimpleCommonCodeService {
     @Override
     public List<CommonCodeDomain> getList(String codeKeyString){
         int cIndex = 0;
-        String[] subCodeKey = codeKeyString.split("\\.");
+        String[] subCodeKey = codeKeyString.split(CODE_SEPARATOR_REGEX);
         String upperCode = "";
         List<CommonCodeDomain> tmpCodeList;
 
@@ -51,7 +51,7 @@ public class DataBaseCommonCodeService implements SimpleCommonCodeService {
     @Override
     public CommonCodeDomain getOne(String codeKeyString) {
         int cIndex = 0;
-        String[] subCodeKey = codeKeyString.split("\\.");
+        String[] subCodeKey = codeKeyString.split(CODE_SEPARATOR_REGEX);
         String upperCode = "";
         List<CommonCodeDomain> tmpCodeList = Lists.newArrayList();
 

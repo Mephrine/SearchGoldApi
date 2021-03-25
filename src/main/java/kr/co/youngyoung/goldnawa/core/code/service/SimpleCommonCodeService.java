@@ -6,7 +6,7 @@ import kr.co.youngyoung.goldnawa.core.code.repository.SimpleCommonCodeRepository
 import java.util.List;
 
 public interface SimpleCommonCodeService extends SimpleCommonCodeRepository {
-    String CODE_SEPARATOR = ".";
+    String CODE_SEPARATOR_REGEX = "\\.";
 
     List<CommonCodeDomain> getList(String code);
     CommonCodeDomain getOne(String code);
