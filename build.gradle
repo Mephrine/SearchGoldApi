@@ -53,5 +53,8 @@ dependencies {
     // jsr-107-api(for ehcache)
     implementation('javax.cache:cache-api:1.1.0')
 
-    compile group: 'com.rometools', name: 'rome', version: '1.11.0'
+    implementation group: 'com.rometools', name: 'rome', version: '1.11.0'
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
+
+    implementation group: 'org.jdom', name: 'jdom', version: '2.0.2'
 }

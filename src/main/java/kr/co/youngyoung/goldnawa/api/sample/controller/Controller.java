@@ -1,5 +1,6 @@
 package kr.co.youngyoung.goldnawa.api.sample.controller;
 
+
 import com.rometools.rome.feed.rss.*;
 import io.swagger.annotations.ApiOperation;
 import kr.co.youngyoung.goldnawa.api.sample.service.SampleService;
@@ -8,6 +9,7 @@ import kr.co.youngyoung.goldnawa.core.annotation.ApiVersion;
 import kr.co.youngyoung.goldnawa.core.controller.BaseController;
 import kr.co.youngyoung.goldnawa.core.domain.ApiResponseObject;
 import kr.co.youngyoung.goldnawa.core.domain.ResultStatusCd;
+import org.apache.commons.lang3.StringEscapeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -86,8 +88,9 @@ public class Controller extends BaseController {
             guid.setPermaLink(false);
             guid.setValue("https://newsroom.hcs.com/front/board/%EC%9D%B4-%ED%9A%8C%EC%82%AC%EA%B0%80-%EC%BD%94%EB%A1%9C%EB%82%9819%EB%A5%BC-%EC%9D%B4%EA%B2%A8%EB%82%B4%EB%8A%94-%EB%B0%A9%EB%B2%95");
             item.setGuid(guid);
+
             Content content = new Content();
-            content.setType("encode");
+            content.setType(Content.HTML);
             content.setValue("<img src=\"https://newsroom.hcs.com/common/file/3ebbaa0cf46a44ec80abf0b3155ac32a/png/getImg.do\">\n" +
                     "<p class=\"img_desc\">\n" +
                     "\t(출처=gettyimageskorea.com)\n" +
