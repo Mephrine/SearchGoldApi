@@ -27,14 +27,14 @@ public class ApiInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         logger.info("ApiInterceptor preHandle {}, {}",getClass(), request.getRequestURL());
 
-        String clientApiKey = request.getHeader("api-key");
+        /*String clientApiKey = request.getHeader("api-key");
 
         if( SERVER_API_KEY.equals(clientApiKey) ) {
 
         }else{
             response.sendError(401, "Authorization not authenticated");
             return false;
-        }
+        }*/
 
         return true;
     }
