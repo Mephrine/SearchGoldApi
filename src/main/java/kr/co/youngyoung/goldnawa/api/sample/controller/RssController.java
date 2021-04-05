@@ -4,11 +4,10 @@ package kr.co.youngyoung.goldnawa.api.sample.controller;
 import io.swagger.annotations.ApiOperation;
 import kr.co.youngyoung.goldnawa.api.sample.service.SampleService;
 import kr.co.youngyoung.goldnawa.common.domain.SampleDomain;
-import kr.co.youngyoung.goldnawa.common.rss.domain.Channel;
-import kr.co.youngyoung.goldnawa.common.rss.domain.Guid;
-import kr.co.youngyoung.goldnawa.common.rss.domain.Item;
-import kr.co.youngyoung.goldnawa.common.rss.domain.Rss;
+import kr.co.youngyoung.goldnawa.common.rss.domain.*;
 import kr.co.youngyoung.goldnawa.common.rss.service.RssBuilder;
+import kr.co.youngyoung.goldnawa.common.rss.service.RssWriter;
+import kr.co.youngyoung.goldnawa.common.rss.variable.UpdatePeriod;
 import kr.co.youngyoung.goldnawa.core.annotation.ApiVersion;
 import kr.co.youngyoung.goldnawa.core.controller.BaseController;
 import kr.co.youngyoung.goldnawa.core.domain.ApiResponseObject;
@@ -28,10 +27,7 @@ import org.springframework.web.servlet.resource.HttpResource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @RestController
 public class RssController extends BaseController {
@@ -50,6 +46,13 @@ public class RssController extends BaseController {
         channel.setDescription("Our Story, 현대카드·현대캐피탈 내 다양한 소식과 기업문화, 임직원들의 이야기를 소개합니다. 현대카드·현대캐피탈 뉴스룸");
         channel.setLink("https://newsroom.hcs.com/front/board/list?sort=1&menuCategory=MNC003&contentCategory=&topMenuCd=FMC003");
         channel.setGenerator("현대카드·현대캐피탈");
+        Syndication syndication = new Syndication();
+        syndication.setUpdatePeriod(UpdatePeriod.HOURLY);
+        syndication.setUpdateFrequency(1);
+        channel.setSyndication(syndication);
+        channel.setSyndication(syndication);
+        Locale locale = new Locale("ko", "KR");
+        channel.setLanguage(locale);
 
         Date postDate = new Date();
         channel.setPubDate(postDate);
@@ -157,17 +160,10 @@ public class RssController extends BaseController {
         channel.setItems(itemList);
         rss.setChannel(channel);
 
-        OutputStreamWriter writer = null;
-        try {
-            writer = new OutputStreamWriter(response.getOutputStream());
-            new XMLOutputter().output(RssBuilder.builder(rss), writer);
-            writer.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            writer.close();
-        }
+        Document doc = RssBuilder.builder(rss);
 
+        //RssWriter.fileWriter(doc, "C:\\xmltest\\Simple.xml");
+        RssWriter.responseStreamWriter(doc, response);
 
 /*// 1. Document 생성
         Document doc = new Document();
