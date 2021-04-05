@@ -5,7 +5,7 @@ public class RssConstant {
     public final static String NS_URL_CONTENT = "http://purl.org/rss/1.0/modules/content/";
     public final static String NS_SYNDICATION = "sy";
     public final static String NS_URL_SYNDICATION = "http://purl.org/rss/1.0/modules/syndication/";
-    public final static String NS_DC = "DC";
+    public final static String NS_DC = "dc";
     public final static String NS_URL_DC = "http://purl.org/dc/elements/1.1/";
     //
     public final static String ELE_RSS = "rss";
