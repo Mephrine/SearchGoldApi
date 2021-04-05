@@ -1,6 +1,7 @@
+spring.profiles.active: local
+
 server:
   port: 8081
-
 # JDBC HIKARI
 spring:
   datasource:
@@ -30,3 +31,13 @@ mybatis.configuration.map-underscore-to-camel-case: true
 mybatis.type-aliases-package: kr.co.youngyoung.goldnawa.common.domain,kr.co.youngyoung.goldnawa.core.code.domain
 # mapper 로그레벨 설정
 logging.level.com.atoz_develop.mybatissample.repository: TRACE
+
+---
+spring.profiles: local
+
+---
+spring.profiles: dev
+
+---
+spring.profiles: prod
+
