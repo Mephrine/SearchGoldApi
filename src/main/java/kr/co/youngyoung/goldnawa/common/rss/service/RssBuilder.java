@@ -24,11 +24,11 @@ public class RssBuilder {
     static public Document builder(Rss rss) {
         Document doc = new Document();
         //네임스페이스 생성
-        Namespace NsContent = Namespace.getNamespace(RssConstant.NS_CONTENT, RssConstant.NS_URL_CONTENT);
+        Namespace nsContent = Namespace.getNamespace(RssConstant.NS_CONTENT, RssConstant.NS_URL_CONTENT);
         Namespace nsDc = Namespace.getNamespace(RssConstant.NS_DC, RssConstant.NS_URL_DC);
         //RSS 생성
         Element rssEle = new Element(RssConstant.ELE_RSS);
-        rssEle.addNamespaceDeclaration(NsContent);
+        rssEle.addNamespaceDeclaration(nsContent);
         rssEle.addNamespaceDeclaration(nsDc);
         String version = rss.getVersion();
         rssEle.setAttribute(RssConstant.ATTR_VERSION, version);
@@ -86,6 +86,7 @@ public class RssBuilder {
             //저자 생성
             if(!StringUtils.isEmpty(generator)) {
                 Element tmpEle = new Element(RssConstant.ELE_CREATOR);
+                tmpEle.setNamespace(nsDc);
                 tmpEle.addContent(new CDATA(generator));
                 itemELe.addContent(tmpEle);
             }
@@ -114,7 +115,7 @@ public class RssBuilder {
             String itemContent = item.getContent();
             if(!StringUtils.isEmpty(itemContent)) {
                 Element tmpEle = new Element(RssConstant.ELE_ENCODED);
-                tmpEle.setNamespace(NsContent);
+                tmpEle.setNamespace(nsContent);
                 tmpEle.addContent(new CDATA(itemContent));
                 itemELe.addContent(tmpEle);
             }
