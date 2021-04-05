@@ -13,7 +13,6 @@ public class Item {
     private String content;
     private Guid guid;
     private Date pubDate;
-    private String category;
     private String author;
     private List<String> categories;
 }
