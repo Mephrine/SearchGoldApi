@@ -2,16 +2,6 @@ spring.profiles.active: local
 
 server:
   port: 8081
-# JDBC HIKARI
-spring:
-  datasource:
-    platform: postgres
-    hakari:
-      maximum-pool-size: 4
-    url: jdbc:postgresql://210.0.47.232:5432/goldnawa
-    username: goldnawa
-    password: goldnawa!
-
 # Logging
 logging:
   config: classpath:log4j2.xml
@@ -35,9 +25,38 @@ logging.level.com.atoz_develop.mybatissample.repository: TRACE
 ---
 spring.profiles: local
 
+# JDBC HIKARI
+spring:
+  datasource:
+    platform: postgres
+    hakari:
+      maximum-pool-size: 4
+    url: jdbc:postgresql://210.0.47.232:5432/goldnawa_dev
+    username: goldnawa
+    password: goldnawa!
+
 ---
 spring.profiles: dev
+
+# JDBC HIKARI
+spring:
+  datasource:
+    platform: postgres
+    hakari:
+      maximum-pool-size: 4
+    url: jdbc:postgresql://210.0.47.232:5432/goldnawa_dev
+    username: goldnawa
+    password: goldnawa!
 
 ---
 spring.profiles: prod
 
+# JDBC HIKARI
+spring:
+  datasource:
+    platform: postgres
+    hakari:
+      maximum-pool-size: 4
+    url: jdbc:postgresql://210.0.47.232:5432/goldnawa
+    username: goldnawa
+    password: goldnawa!
