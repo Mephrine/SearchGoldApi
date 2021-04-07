@@ -9,6 +9,7 @@ import org.jdom2.Document;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,12 +22,23 @@ public class RssController extends BaseController {
     @Autowired
     SampleService sampleService;
 
+    @Value("${spring.profiles}")
+    String profile;
+
     @GetMapping(path = "/rss")
     @ApiOperation(value = "샘플 매핑",
             notes = "이것은 샘플 매핑입니다")
     public void sample(HttpServletRequest request, HttpServletResponse response) throws IOException, JDOMException {
+        String path = "";
+        if( "local".equals(profile) ){
+            path = "C:\\workspace\\newsroom-front\\web\\WebContent\\UPLOAD\\RSS\\RssPressRelease.xml";
+        }else{
+            path = "/home/devrartes/RssPressRelease.xml";
+        }
+
+
         SAXBuilder builder = new SAXBuilder();
-        Document doc = builder.build("C:\\workspace\\newsroom-front\\web\\WebContent\\UPLOAD\\RSS\\RssPressRelease.xml");
+        Document doc = builder.build(path);
 
         RssWriter.responseStreamWriter(doc, response);
 /*// 1. Document 생성
