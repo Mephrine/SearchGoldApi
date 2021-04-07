@@ -1,4 +1,4 @@
-package kr.co.youngyoung.goldnawa.common.rss.service;
+package kr.co.youngyoung.goldnawa.common.rss.util;
 
 import org.jdom2.Document;
 import org.jdom2.output.Format;

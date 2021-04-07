@@ -1,4 +1,4 @@
-package kr.co.youngyoung.goldnawa.common.rss.service;
+package kr.co.youngyoung.goldnawa.common.rss.util;
 
 import kr.co.youngyoung.goldnawa.common.rss.domain.Channel;
 import kr.co.youngyoung.goldnawa.common.rss.domain.Guid;
