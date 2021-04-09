@@ -40,7 +40,7 @@ public class RssController extends BaseController {
         RssWriter.responseStreamWriter(doc, response);
     }
 
-    @GetMapping(path = "/rss/rssOurStory")
+    @GetMapping(path = "/rss/ourStory")
     public void rssOurStory(HttpServletRequest request, HttpServletResponse response) throws IOException, JDOMException {
         String path = "";
         if( "local".equals(profile) ){
