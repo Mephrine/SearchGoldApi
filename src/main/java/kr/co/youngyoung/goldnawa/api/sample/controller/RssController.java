@@ -46,7 +46,7 @@ public class RssController extends BaseController {
         if( "local".equals(profile) ){
             path = "C:\\workspace\\newsroom-front\\web\\WebContent\\UPLOAD\\RSS\\RssOurStory.xml";
         }else{
-            path = "/home/devrartes/RssPressRelease.xml";
+            path = "/home/devrartes/RssOurStory.xml";
         }
 
         SAXBuilder builder = new SAXBuilder();
@@ -61,7 +61,7 @@ public class RssController extends BaseController {
         if( "local".equals(profile) ){
             path = "C:\\workspace\\newsroom-front\\web\\WebContent\\UPLOAD\\RSS\\RssTrendInsight.xml";
         }else{
-            path = "/home/devrartes/RssPressRelease.xml";
+            path = "/home/devrartes/RssTrendInsight.xml";
         }
 
         SAXBuilder builder = new SAXBuilder();
